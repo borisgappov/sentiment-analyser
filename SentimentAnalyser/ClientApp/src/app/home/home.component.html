@@ -1,0 +1,9 @@
+<dx-tab-panel [focusStateEnabled]="false" [(selectedIndex)]="selectedTabIndex"
+  (onSelectionChanged)="onSelectionChanged()">
+  <dxi-item title="Calculation">
+    <app-calculation></app-calculation>
+  </dxi-item>
+  <dxi-item title="Lexicon">
+    <router-outlet></router-outlet>
+  </dxi-item>
+</dx-tab-panel>
