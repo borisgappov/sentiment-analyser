@@ -1,0 +1,19 @@
+.text-block {
+  border-radius: 3px;
+  border: 1px solid #dddddd;
+  min-height: 100px;
+}
+
+.popup-content {
+  min-height: 300px;
+}
+
+::ng-deep.red {
+  color: red;
+  font-weight: bold;
+}
+
+::ng-deep.green {
+  color: green;
+  font-weight: bold;
+}

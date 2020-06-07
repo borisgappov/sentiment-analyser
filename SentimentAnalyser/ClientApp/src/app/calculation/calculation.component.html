@@ -1,1 +1,47 @@
-<p>calculation works!</p>
+<dx-toolbar class="m-2">
+  <dxi-item location="before">
+    <dx-button icon="fa fa-pencil" text="Enter text" hint="Enter text" (onClick)="textPopupVisible=true">
+    </dx-button>
+  </dxi-item>
+  <dxi-item location="before">
+    <dx-button icon="fa fa-file-text-o" text="Upload file" hint="Upload file" (onClick)="filePopupVisible=true">
+    </dx-button>
+  </dxi-item>
+  <dxi-item location="before">
+    <dx-button icon="fa fa-trash-o" text="clear" hint="Clear" (onClick)="clear()"></dx-button>
+  </dxi-item>
+</dx-toolbar>
+
+<div class="text-block m-2 mt-0 p-2" [innerHTML]="resultHtml">
+
+</div>
+
+<dx-popup [maxWidth]="700" [height]="450" [showTitle]="true" title="Enter text" [dragEnabled]="true"
+  [(visible)]="textPopupVisible">
+  <div class="popup-content">
+    <dx-text-area class="m-2" [height]="300" [(value)]="textAreaValue">
+    </dx-text-area>
+  </div>
+  <div class="d-flex flex-row-reverse m-2">
+
+    <dx-button class="ml-2" stylingMode="contained" text="Submit" type="success" (onClick)="submit()">
+    </dx-button>
+
+    <dx-button stylingMode="outlined" text="Cancel" type="success" (onClick)="textPopupVisible=false">
+    </dx-button>
+
+  </div>
+</dx-popup>
+
+<dx-popup [maxWidth]="700" [height]="490" [showTitle]="true" title="Upload file" [dragEnabled]="true"
+  [(visible)]="filePopupVisible">
+  <div class="popup-content">
+    <div class="m-2">
+      <dx-file-uploader #fileUploader id="file" name="file" selectButtonText="Select *.txt file" labelText=""
+        accept="text/plain" [uploadUrl]="uploadUrl" (onUploadStarted)="onUploadStarted()"
+        (onUploaded)="onUploaded($event)" (onUploadError)="onUploadError($event)" (onUploadAborted)="onUploadAborted()">
+      </dx-file-uploader>
+
+    </div>
+  </div>
+</dx-popup>

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using SentimentAnalyser.Data;
 using SentimentAnalyser.Models.Entities;
 
@@ -13,9 +14,12 @@ namespace SentimentAnalyser
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment _env;
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            _env = env;
         }
 
         public IConfiguration Configuration { get; }
@@ -37,6 +41,13 @@ namespace SentimentAnalyser
                 .AddIdentityServerJwt();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            if (_env.IsDevelopment())
+                services.AddSwaggerGen(options =>
+                {
+                    options.SwaggerDoc("v1", new OpenApiInfo {Title = "Sentiment Analyser API", Version = "v1"});
+                });
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
         }
@@ -73,6 +84,13 @@ namespace SentimentAnalyser
                 endpoints.MapRazorPages();
             });
 
+            if (env.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI(
+                    options => { options.SwaggerEndpoint("/swagger/v1/swagger.json", "Sentiment Analyser API"); });
+            }
+
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
@@ -80,7 +98,17 @@ namespace SentimentAnalyser
 
                 spa.Options.SourcePath = "ClientApp";
 
-                if (env.IsDevelopment()) spa.UseAngularCliServer("start");
+                if (env.IsDevelopment())
+                {
+
+                    // because of a .net core 3 + Angular 9 bug
+                    // please start the client manually (to to ClientApp dir and run: npm start)
+                    // https://github.com/dotnet/aspnetcore/issues/17277
+
+                    // spa.UseAngularCliServer("start"); 
+
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+                }
             });
         }
     }
