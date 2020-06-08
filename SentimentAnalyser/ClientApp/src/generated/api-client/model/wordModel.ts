@@ -13,6 +13,7 @@ import { SentimentRating } from './sentimentRating';
 
 
 export interface WordModel { 
+    id?: number;
     text?: string | null;
     sentiment?: SentimentRating;
 }

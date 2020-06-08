@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DxFileUploaderComponent } from 'devextreme-angular';
+import { DxFileUploaderComponent, DxTextAreaComponent } from 'devextreme-angular';
 import { CalculationsService, AnalyzeTextRequest, AnalyzeTextResponse } from '../../generated/api-client';
 import { PlatformLocation } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import notify from 'devextreme/ui/notify';
 
 @Component({
   selector: 'app-calculation',
@@ -11,6 +12,8 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 })
 export class CalculationComponent implements OnInit {
   @ViewChild('fileUploader') fileUploader: DxFileUploaderComponent;
+  @ViewChild('textArea') textArea: DxTextAreaComponent;
+
   textPopupVisible = false;
   filePopupVisible = false;
   textAreaValue = '';
@@ -32,6 +35,7 @@ export class CalculationComponent implements OnInit {
 
   openTextDialog() {
     this.textPopupVisible = true;
+    setTimeout(() => this.textArea.instance.focus(), 500);
   }
 
   clear() {
@@ -40,19 +44,23 @@ export class CalculationComponent implements OnInit {
   }
 
   submit() {
-    this.calcService.apiCalculationsAnalyzeTextPost({
-      text: this.textAreaValue
-    } as AnalyzeTextRequest)
-      .subscribe(x => {
-        this.resultHtml = this.sanitizer.bypassSecurityTrustHtml(x.html);
-        this.score = x.score;
-        this.textPopupVisible = false;
-      });
-    this.textAreaValue = '';
+    if (this.textAreaValue.trim().length === 0) {
+      notify('Please enter text', 'warning', 3000);
+    } else {
+      this.calcService.apiCalculationsAnalyzeTextPost({
+        text: this.textAreaValue
+      } as AnalyzeTextRequest)
+        .subscribe(x => {
+          this.resultHtml = this.sanitizer.bypassSecurityTrustHtml(x.html);
+          this.score = x.score;
+          this.textPopupVisible = false;
+        });
+      this.textAreaValue = '';
+    }
   }
 
   openFileDialog() {
-    this.textPopupVisible = true;
+    this.filePopupVisible = true;
   }
 
   onUploadStarted() {

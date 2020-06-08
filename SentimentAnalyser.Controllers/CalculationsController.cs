@@ -102,10 +102,12 @@ namespace SentimentAnalyser.Controllers
                 sb.Append(word.text);
             }
 
+            var sentiments = words.Where(x => x.sentiment != 0).Select(x => x.sentiment).ToArray();
+
             return new AnalyzeTextResponse
             {
                 Html = sb.ToString(),
-                Score = words.Where(x => x.sentiment != 0).Select(x => x.sentiment).Average()
+                Score = sentiments.Length == 0 ? 0 : sentiments.Average()
             };
         }
     }

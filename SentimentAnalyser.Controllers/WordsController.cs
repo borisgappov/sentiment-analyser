@@ -40,6 +40,7 @@ namespace SentimentAnalyser.Controllers
         }
 
         [HttpPut]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult<WordModel>> PutWord([FromForm] int key, [FromForm] string values)
         {
             var word = await _context.Words.FindAsync(key);
@@ -60,6 +61,7 @@ namespace SentimentAnalyser.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult<WordModel>> PostWord([FromForm] string values)
         {
             var word = values.Populate<Word>();
@@ -80,6 +82,7 @@ namespace SentimentAnalyser.Controllers
         }
 
         [HttpDelete]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult<WordModel>> DeleteWord([FromForm] int key)
         {
             var word = await _context.Words.FindAsync(key);

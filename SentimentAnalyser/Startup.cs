@@ -15,20 +15,22 @@ namespace SentimentAnalyser
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
         private readonly IWebHostEnvironment _env;
+
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
             _env = env;
         }
-      
+
+        public IConfiguration Configuration { get; }
+
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            
+
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -66,14 +68,14 @@ namespace SentimentAnalyser
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            
+
             if (!env.IsDevelopment()) app.UseSpaStaticFiles();
-            
+
             app.UseRouting();
             app.UseAuthentication();
             app.UseIdentityServer();
             app.UseAuthorization();
-            
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -81,7 +83,7 @@ namespace SentimentAnalyser
                     "{controller}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
-            
+
             if (env.IsDevelopment())
             {
                 app.UseSwagger();
@@ -93,6 +95,12 @@ namespace SentimentAnalyser
             {
                 spa.Options.SourcePath = "ClientApp";
 
+                /*
+                //spa.UseAngularCliServer("start");  
+                because of a .net core 3 + Angular 9 bug
+                please start the client manually (to to ClientApp dir and run: npm start)
+                https://github.com/dotnet/aspnetcore/issues/17277                
+                */
                 if (env.IsDevelopment()) spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
             });
         }

@@ -8,6 +8,5 @@ export * from './inlineObject3';
 export * from './sentimentRating';
 export * from './sortingInfo';
 export * from './summaryInfo';
-export * from './word';
 export * from './wordModel';
 export * from './wordModelLoadResponse';

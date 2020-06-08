@@ -12,6 +12,6 @@
 
 
 export interface InlineObject3 { 
-    key?: string | null;
+    key?: number;
 }
 

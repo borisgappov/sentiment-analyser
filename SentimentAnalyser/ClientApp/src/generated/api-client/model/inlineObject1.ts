@@ -9,12 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { SentimentRating } from './sentimentRating';
 
 
 export interface InlineObject1 { 
-    key?: string | null;
-    Text?: string | null;
-    Sentiment?: SentimentRating;
+    key?: number;
+    values?: string | null;
 }
 

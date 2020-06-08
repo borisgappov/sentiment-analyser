@@ -1,10 +1,10 @@
 <dx-toolbar class="m-2">
   <dxi-item location="before">
-    <dx-button icon="fa fa-pencil" text="Enter text" hint="Enter text" (onClick)="textPopupVisible=true">
+    <dx-button icon="fa fa-pencil" text="Enter text" hint="Enter text" (onClick)="openTextDialog()">
     </dx-button>
   </dxi-item>
   <dxi-item location="before">
-    <dx-button icon="fa fa-file-text-o" text="Upload file" hint="Upload file" (onClick)="filePopupVisible=true">
+    <dx-button icon="fa fa-file-text-o" text="Upload file" hint="Upload file" (onClick)="openFileDialog()">
     </dx-button>
   </dxi-item>
   <dxi-item location="before">
@@ -23,7 +23,7 @@
 <dx-popup [maxWidth]="700" [height]="450" [showTitle]="true" title="Enter text" [dragEnabled]="true"
   [(visible)]="textPopupVisible">
   <div class="popup-content">
-    <dx-text-area class="m-2" [height]="300" [(value)]="textAreaValue">
+    <dx-text-area #textArea class="m-2" [height]="300" [(value)]="textAreaValue">
     </dx-text-area>
   </div>
   <div class="d-flex flex-row-reverse m-2">

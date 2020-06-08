@@ -18,10 +18,9 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { GroupingInfo } from '../model/models';
-import { SentimentRating } from '../model/models';
 import { SortingInfo } from '../model/models';
 import { SummaryInfo } from '../model/models';
-import { Word } from '../model/models';
+import { WordModel } from '../model/models';
 import { WordModelLoadResponse } from '../model/models';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -108,10 +107,10 @@ export class WordsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiWordsDelete(key?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<Word>;
-    public apiWordsDelete(key?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<Word>>;
-    public apiWordsDelete(key?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<Word>>;
-    public apiWordsDelete(key?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
+    public apiWordsDelete(key?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<WordModel>;
+    public apiWordsDelete(key?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<WordModel>>;
+    public apiWordsDelete(key?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<WordModel>>;
+    public apiWordsDelete(key?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -154,7 +153,7 @@ export class WordsService {
             responseType = 'text';
         }
 
-        return this.httpClient.delete<Word>(`${this.configuration.basePath}/api/Words`,
+        return this.httpClient.delete<WordModel>(`${this.configuration.basePath}/api/Words`,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,
@@ -332,15 +331,14 @@ export class WordsService {
     }
 
     /**
-     * @param text 
-     * @param sentiment 
+     * @param values 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiWordsPost(text?: string, sentiment?: SentimentRating, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<Word>;
-    public apiWordsPost(text?: string, sentiment?: SentimentRating, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<Word>>;
-    public apiWordsPost(text?: string, sentiment?: SentimentRating, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<Word>>;
-    public apiWordsPost(text?: string, sentiment?: SentimentRating, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
+    public apiWordsPost(values?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<WordModel>;
+    public apiWordsPost(values?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<WordModel>>;
+    public apiWordsPost(values?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<WordModel>>;
+    public apiWordsPost(values?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -374,11 +372,8 @@ export class WordsService {
             formParams = new HttpParams({encoder: this.encoder});
         }
 
-        if (text !== undefined) {
-            formParams = formParams.append('Text', <any>text) as any || formParams;
-        }
-        if (sentiment !== undefined) {
-            formParams = formParams.append('Sentiment', <any>sentiment) as any || formParams;
+        if (values !== undefined) {
+            formParams = formParams.append('values', <any>values) as any || formParams;
         }
 
         let responseType: 'text' | 'json' = 'json';
@@ -386,7 +381,7 @@ export class WordsService {
             responseType = 'text';
         }
 
-        return this.httpClient.post<Word>(`${this.configuration.basePath}/api/Words`,
+        return this.httpClient.post<WordModel>(`${this.configuration.basePath}/api/Words`,
             convertFormParamsToString ? formParams.toString() : formParams,
             {
                 responseType: <any>responseType,
@@ -400,15 +395,14 @@ export class WordsService {
 
     /**
      * @param key 
-     * @param text 
-     * @param sentiment 
+     * @param values 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiWordsPut(key?: string, text?: string, sentiment?: SentimentRating, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<any>;
-    public apiWordsPut(key?: string, text?: string, sentiment?: SentimentRating, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpResponse<any>>;
-    public apiWordsPut(key?: string, text?: string, sentiment?: SentimentRating, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpEvent<any>>;
-    public apiWordsPut(key?: string, text?: string, sentiment?: SentimentRating, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined}): Observable<any> {
+    public apiWordsPut(key?: number, values?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<WordModel>;
+    public apiWordsPut(key?: number, values?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<WordModel>>;
+    public apiWordsPut(key?: number, values?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<WordModel>>;
+    public apiWordsPut(key?: number, values?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -416,6 +410,9 @@ export class WordsService {
         if (httpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
+                'text/plain',
+                'application/json',
+                'text/json'
             ];
             httpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -442,11 +439,8 @@ export class WordsService {
         if (key !== undefined) {
             formParams = formParams.append('key', <any>key) as any || formParams;
         }
-        if (text !== undefined) {
-            formParams = formParams.append('Text', <any>text) as any || formParams;
-        }
-        if (sentiment !== undefined) {
-            formParams = formParams.append('Sentiment', <any>sentiment) as any || formParams;
+        if (values !== undefined) {
+            formParams = formParams.append('values', <any>values) as any || formParams;
         }
 
         let responseType: 'text' | 'json' = 'json';
@@ -454,7 +448,7 @@ export class WordsService {
             responseType = 'text';
         }
 
-        return this.httpClient.put<any>(`${this.configuration.basePath}/api/Words`,
+        return this.httpClient.put<WordModel>(`${this.configuration.basePath}/api/Words`,
             convertFormParamsToString ? formParams.toString() : formParams,
             {
                 responseType: <any>responseType,
