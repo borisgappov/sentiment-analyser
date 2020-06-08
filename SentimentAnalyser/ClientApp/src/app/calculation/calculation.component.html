@@ -12,8 +12,12 @@
   </dxi-item>
 </dx-toolbar>
 
-<div class="text-block m-2 mt-0 p-2" [innerHTML]="resultHtml">
-
+<div class="text-block m-2 mt-0 p-2">
+  <div *ngIf="!!resultHtml" class="mb-3">
+    <b>Score: </b><span [ngClass]="{'red': score < 0, 'green': score > 0}">{{score}}</span>
+    <hr />
+  </div>
+  <div [innerHTML]="resultHtml"></div>
 </div>
 
 <dx-popup [maxWidth]="700" [height]="450" [showTitle]="true" title="Enter text" [dragEnabled]="true"
@@ -23,17 +27,14 @@
     </dx-text-area>
   </div>
   <div class="d-flex flex-row-reverse m-2">
-
     <dx-button class="ml-2" stylingMode="contained" text="Submit" type="success" (onClick)="submit()">
     </dx-button>
-
     <dx-button stylingMode="outlined" text="Cancel" type="success" (onClick)="textPopupVisible=false">
     </dx-button>
-
   </div>
 </dx-popup>
 
-<dx-popup [maxWidth]="700" [height]="490" [showTitle]="true" title="Upload file" [dragEnabled]="true"
+<dx-popup [maxWidth]="700" [height]="250" [showTitle]="true" title="Upload file" [dragEnabled]="true"
   [(visible)]="filePopupVisible">
   <div class="popup-content">
     <div class="m-2">
@@ -41,7 +42,6 @@
         accept="text/plain" [uploadUrl]="uploadUrl" (onUploadStarted)="onUploadStarted()"
         (onUploaded)="onUploaded($event)" (onUploadError)="onUploadError($event)" (onUploadAborted)="onUploadAborted()">
       </dx-file-uploader>
-
     </div>
   </div>
 </dx-popup>

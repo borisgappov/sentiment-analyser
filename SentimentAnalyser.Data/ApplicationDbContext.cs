@@ -20,7 +20,11 @@ namespace SentimentAnalyser.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Word>(entity => { entity.ToTable("Lexicon"); });
-            
+
+            builder.Entity<Word>()
+                .HasIndex(u => u.Text)
+                .IsUnique();
+
             Seed(builder);
 
             base.OnModelCreating(builder);
@@ -29,8 +33,9 @@ namespace SentimentAnalyser.Data
         private void Seed(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Word>().HasData(
-                SeedData.Words.Select(x => new Word
+                SeedData.Words.Select((x, i) => new Word
                 {
+                    Id = i + 1,
                     Text = x.Key,
                     Sentiment = x.Value
                 }).ToArray()

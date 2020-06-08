@@ -11,9 +11,11 @@
 ::ng-deep.red {
   color: red;
   font-weight: bold;
+  background-color: rgba(255, 0, 0, 0.123);
 }
 
 ::ng-deep.green {
   color: green;
   font-weight: bold;
+  background-color: rgba(0, 255, 0, 0.123);
 }

@@ -18,6 +18,7 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { AnalyzeTextRequest } from '../model/models';
+import { AnalyzeTextResponse } from '../model/models';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -103,10 +104,10 @@ export class CalculationsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public calculationsAnalyzeFilePost(file?: Blob, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<string>;
-    public calculationsAnalyzeFilePost(file?: Blob, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<string>>;
-    public calculationsAnalyzeFilePost(file?: Blob, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<string>>;
-    public calculationsAnalyzeFilePost(file?: Blob, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
+    public apiCalculationsAnalyzeFilePost(file?: Blob, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<AnalyzeTextResponse>;
+    public apiCalculationsAnalyzeFilePost(file?: Blob, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<AnalyzeTextResponse>>;
+    public apiCalculationsAnalyzeFilePost(file?: Blob, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<AnalyzeTextResponse>>;
+    public apiCalculationsAnalyzeFilePost(file?: Blob, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -152,7 +153,7 @@ export class CalculationsService {
             responseType = 'text';
         }
 
-        return this.httpClient.post<string>(`${this.configuration.basePath}/Calculations/AnalyzeFile`,
+        return this.httpClient.post<AnalyzeTextResponse>(`${this.configuration.basePath}/api/Calculations/AnalyzeFile`,
             convertFormParamsToString ? formParams.toString() : formParams,
             {
                 responseType: <any>responseType,
@@ -169,10 +170,10 @@ export class CalculationsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public calculationsAnalyzeTextPost(analyzeTextRequest?: AnalyzeTextRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<string>;
-    public calculationsAnalyzeTextPost(analyzeTextRequest?: AnalyzeTextRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<string>>;
-    public calculationsAnalyzeTextPost(analyzeTextRequest?: AnalyzeTextRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<string>>;
-    public calculationsAnalyzeTextPost(analyzeTextRequest?: AnalyzeTextRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
+    public apiCalculationsAnalyzeTextPost(analyzeTextRequest?: AnalyzeTextRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<AnalyzeTextResponse>;
+    public apiCalculationsAnalyzeTextPost(analyzeTextRequest?: AnalyzeTextRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<AnalyzeTextResponse>>;
+    public apiCalculationsAnalyzeTextPost(analyzeTextRequest?: AnalyzeTextRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<AnalyzeTextResponse>>;
+    public apiCalculationsAnalyzeTextPost(analyzeTextRequest?: AnalyzeTextRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -207,7 +208,7 @@ export class CalculationsService {
             responseType = 'text';
         }
 
-        return this.httpClient.post<string>(`${this.configuration.basePath}/Calculations/AnalyzeText`,
+        return this.httpClient.post<AnalyzeTextResponse>(`${this.configuration.basePath}/api/Calculations/AnalyzeText`,
             analyzeTextRequest,
             {
                 responseType: <any>responseType,

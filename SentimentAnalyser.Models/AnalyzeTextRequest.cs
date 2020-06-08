@@ -1,4 +1,4 @@
-﻿namespace SentimentAnalyser.Models.Requests
+﻿namespace SentimentAnalyser.Models
 {
     public class AnalyzeTextRequest
     {

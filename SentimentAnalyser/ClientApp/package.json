@@ -28,6 +28,7 @@
     "core-js": "^3.6.5",
     "devextreme": "20.1-stable",
     "devextreme-angular": "20.1-stable",
+    "devextreme-aspnet-data-nojquery": "^2.6.1",
     "devextreme-schematics": "^1.2.0",
     "jquery": "^3.5.1",
     "oidc-client": "^1.9.1",

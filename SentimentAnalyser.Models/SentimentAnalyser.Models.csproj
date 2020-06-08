@@ -5,7 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Automapper" Version="9.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SentimentAnalyser.Infrastructure\SentimentAnalyser.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="DevExtreme.AspNet.Data">
+      <HintPath>C:\Users\Boris\.nuget\packages\devextreme.aspnet.data\2.6.1\lib\netstandard2.0\DevExtreme.AspNet.Data.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

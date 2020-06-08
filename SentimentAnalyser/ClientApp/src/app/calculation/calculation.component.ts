@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DxFileUploaderComponent } from 'devextreme-angular';
-import { CalculationsService, AnalyzeTextRequest } from '../../generated/api-client';
+import { CalculationsService, AnalyzeTextRequest, AnalyzeTextResponse } from '../../generated/api-client';
 import { PlatformLocation } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
@@ -14,9 +14,10 @@ export class CalculationComponent implements OnInit {
   textPopupVisible = false;
   filePopupVisible = false;
   textAreaValue = '';
-  uploadUrl = '/Calculations/AnalyzeFile';
+  uploadUrl = '/api/Calculations/AnalyzeFile';
   uploading = false;
   resultHtml: SafeHtml;
+  score = 0;
 
   constructor(
     private calcService: CalculationsService,
@@ -35,14 +36,16 @@ export class CalculationComponent implements OnInit {
 
   clear() {
     this.resultHtml = null;
+    this.score = 0;
   }
 
   submit() {
-    this.calcService.calculationsAnalyzeTextPost({
+    this.calcService.apiCalculationsAnalyzeTextPost({
       text: this.textAreaValue
     } as AnalyzeTextRequest)
       .subscribe(x => {
-        this.resultHtml = this.sanitizer.bypassSecurityTrustHtml(x);
+        this.resultHtml = this.sanitizer.bypassSecurityTrustHtml(x.html);
+        this.score = x.score;
         this.textPopupVisible = false;
       });
     this.textAreaValue = '';
@@ -57,10 +60,14 @@ export class CalculationComponent implements OnInit {
   }
 
   onUploaded(e) {
-    var result = JSON.parse(e.request.responseText);
+    if (e.request.responseText) {
+      const result = JSON.parse(e.request.responseText) as AnalyzeTextResponse;
+      this.resultHtml = this.sanitizer.bypassSecurityTrustHtml(result.html);
+      this.score = result.score;
+      this.filePopupVisible = false;
+    }
     this.uploading = false;
     this.fileUploader.instance.reset();
-    this.filePopupVisible = true;
   }
 
   onUploadError(e) {

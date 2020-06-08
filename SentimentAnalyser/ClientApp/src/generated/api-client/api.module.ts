@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { CalculationsService } from './api/calculations.service';
 import { OidcConfigurationService } from './api/oidcConfiguration.service';
+import { WordsService } from './api/words.service';
 
 @NgModule({
   imports:      [],

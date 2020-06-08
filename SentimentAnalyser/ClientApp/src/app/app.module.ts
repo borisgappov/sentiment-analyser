@@ -10,7 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
-import { DxTabPanelModule, DxButtonModule, DxToolbarModule, DxPopupModule, DxTextAreaModule, DxFileUploaderModule } from 'devextreme-angular';
+import { DxTabPanelModule, DxButtonModule, DxToolbarModule, DxPopupModule, DxTextAreaModule, DxFileUploaderModule, DxDataGridModule } from 'devextreme-angular';
 import { LexiconComponent } from './lexicon/lexicon.component';
 import { CalculationComponent } from './calculation/calculation.component';
 
@@ -33,6 +33,7 @@ import { CalculationComponent } from './calculation/calculation.component';
     DxPopupModule,
     DxTextAreaModule,
     DxFileUploaderModule,
+    DxDataGridModule,
     RouterModule.forRoot([
       {
         path: '', component: HomeComponent,

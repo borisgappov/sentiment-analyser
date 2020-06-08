@@ -5,7 +5,7 @@
     "version": "v1"
   },
   "paths": {
-    "/Calculations/AnalyzeFile": {
+    "/api/Calculations/AnalyzeFile": {
       "post": {
         "tags": [
           "Calculations"
@@ -37,17 +37,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/AnalyzeTextResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/AnalyzeTextResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/AnalyzeTextResponse"
                 }
               }
             }
@@ -55,7 +55,7 @@
         }
       }
     },
-    "/Calculations/AnalyzeText": {
+    "/api/Calculations/AnalyzeText": {
       "post": {
         "tags": [
           "Calculations"
@@ -85,17 +85,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/AnalyzeTextResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/AnalyzeTextResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/AnalyzeTextResponse"
                 }
               }
             }
@@ -125,16 +125,515 @@
           }
         }
       }
+    },
+    "/api/Words": {
+      "get": {
+        "tags": [
+          "Words"
+        ],
+        "parameters": [
+          {
+            "name": "RequireTotalCount",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "RequireGroupCount",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "IsCountQuery",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Skip",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Take",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Sort",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/SortingInfo"
+              },
+              "nullable": true
+            }
+          },
+          {
+            "name": "Group",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/GroupingInfo"
+              },
+              "nullable": true
+            }
+          },
+          {
+            "name": "Filter",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false
+              },
+              "nullable": true
+            }
+          },
+          {
+            "name": "TotalSummary",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/SummaryInfo"
+              },
+              "nullable": true
+            }
+          },
+          {
+            "name": "GroupSummary",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/SummaryInfo"
+              },
+              "nullable": true
+            }
+          },
+          {
+            "name": "Select",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "nullable": true
+            }
+          },
+          {
+            "name": "PreSelect",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "nullable": true
+            }
+          },
+          {
+            "name": "RemoteSelect",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "RemoteGrouping",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "ExpandLinqSumType",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "PrimaryKey",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "nullable": true
+            }
+          },
+          {
+            "name": "DefaultSort",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "StringToLower",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "PaginateViaPrimaryKey",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "SortByPrimaryKey",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "AllowAsyncOverSync",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/WordModelLoadResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WordModelLoadResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WordModelLoadResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Words"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "Text": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "Sentiment": {
+                    "$ref": "#/components/schemas/SentimentRating"
+                  }
+                }
+              },
+              "encoding": {
+                "key": {
+                  "style": "form"
+                },
+                "Text": {
+                  "style": "form"
+                },
+                "Sentiment": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Words"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Text": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "Sentiment": {
+                    "$ref": "#/components/schemas/SentimentRating"
+                  }
+                }
+              },
+              "encoding": {
+                "Text": {
+                  "style": "form"
+                },
+                "Sentiment": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Word"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Word"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Word"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Words"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
+              },
+              "encoding": {
+                "key": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Word"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Word"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Word"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "AnalyzeTextResponse": {
+        "type": "object",
+        "properties": {
+          "html": {
+            "type": "string",
+            "nullable": true
+          },
+          "score": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "additionalProperties": false
+      },
       "AnalyzeTextRequest": {
         "type": "object",
         "properties": {
           "text": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SortingInfo": {
+        "type": "object",
+        "properties": {
+          "selector": {
+            "type": "string",
+            "nullable": true
+          },
+          "desc": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GroupingInfo": {
+        "type": "object",
+        "properties": {
+          "groupInterval": {
+            "type": "string",
+            "nullable": true
+          },
+          "isExpanded": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "selector": {
+            "type": "string",
+            "nullable": true
+          },
+          "desc": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SummaryInfo": {
+        "type": "object",
+        "properties": {
+          "selector": {
+            "type": "string",
+            "nullable": true
+          },
+          "summaryType": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SentimentRating": {
+        "enum": [
+          0,
+          4,
+          8,
+          -8,
+          -5
+        ],
+        "type": "integer",
+        "format": "int32",
+        "x-enum-varnames": [
+          "Modest",
+          "Nice",
+          "Excellent",
+          "Horrible",
+          "Ugly"
+        ]
+      },
+      "WordModel": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "sentiment": {
+            "$ref": "#/components/schemas/SentimentRating"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WordModelLoadResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WordModel"
+            },
+            "nullable": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "groupCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "summary": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Word": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "sentiment": {
+            "type": "number",
+            "format": "float"
           }
         },
         "additionalProperties": false

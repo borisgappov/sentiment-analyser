@@ -1,16 +1,18 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SentimentAnalyser.Data;
-using SentimentAnalyser.Models.Requests;
+using SentimentAnalyser.Models;
 
 namespace SentimentAnalyser.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class CalculationsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -22,19 +24,31 @@ namespace SentimentAnalyser.Controllers
 
         [HttpPost]
         [Route("AnalyzeFile")]
-        public async Task<ActionResult<string>> AnalyzeFile(IFormFile file)
+        public async Task<ActionResult<AnalyzeTextResponse>> AnalyzeFile(IFormFile file)
         {
-            return Ok();
+            if (file != null)
+            {
+                var result = new StringBuilder();
+                using (var reader = new StreamReader(file.OpenReadStream()))
+                {
+                    while (reader.Peek() >= 0)
+                        result.AppendLine(await reader.ReadLineAsync());
+                }
+
+                return await Analyze(result.ToString());
+            }
+
+            return BadRequest();
         }
 
         [HttpPost]
         [Route("AnalyzeText")]
-        public async Task<ActionResult<string>> AnalyzeText([FromBody]AnalyzeTextRequest model)
+        public async Task<ActionResult<AnalyzeTextResponse>> AnalyzeText([FromBody] AnalyzeTextRequest model)
         {
-            return Analyze(model.Text);
+            return await Analyze(model.Text);
         }
 
-        private string Analyze(string text)
+        private async Task<AnalyzeTextResponse> Analyze(string text)
         {
             var newLine = "{new-line}";
 
@@ -50,18 +64,18 @@ namespace SentimentAnalyser.Controllers
                 .Select(x => new
                 {
                     text = x.Trim(),
-                    lower = x.Trim().ToLower(),
+                    lower = x.Trim().ToLower()
                 })
                 .Where(x => !string.IsNullOrEmpty(x.text))
                 .ToArray();
 
             // select database words
-            var dbWords = _context.Words.ToArray();
+            var dbWords = await _context.Words.ToArrayAsync();
 
             // mark positive and negative words
             var words =
                 (from s in inputWords
-                 from w in dbWords.Where(x => x.Text == s.lower).DefaultIfEmpty()
+                    from w in dbWords.Where(x => x.Text == s.lower).DefaultIfEmpty()
                     select new
                     {
                         s,
@@ -69,22 +83,30 @@ namespace SentimentAnalyser.Controllers
                     })
                 .Select(x =>
                 {
-                    var result = x.w == null 
-                    ? x.s.text
-                    : $"<span class=\"{(x.w.Sentiment > 0 ? "green" : "red")}\">{x.s.text}</span>";
-                    
-                    return result == newLine ? "<br/>" : result;
+                    var result = x.w == null
+                        ? x.s.text
+                        : $"<span class=\"{(x.w.Sentiment > 0 ? "green" : "red")}\">{x.s.text}</span>";
+
+                    return new
+                    {
+                        text = result == newLine ? "<br/>" : result,
+                        sentiment = x.w?.Sentiment ?? 0
+                    };
                 }).ToArray();
 
             // combine to text
             var sb = new StringBuilder();
             foreach (var word in words)
             {
-                if(sb.Length > 0) sb.Append(' ');
-                sb.Append(word);
+                if (sb.Length > 0) sb.Append(' ');
+                sb.Append(word.text);
             }
 
-            return sb.ToString();
+            return new AnalyzeTextResponse
+            {
+                Html = sb.ToString(),
+                Score = words.Where(x => x.sentiment != 0).Select(x => x.sentiment).Average()
+            };
         }
     }
 }
