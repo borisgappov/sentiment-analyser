@@ -100,14 +100,18 @@ export class CalculationsService {
     }
 
     /**
+     * @param version 
      * @param file 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiCalculationsAnalyzeFilePost(file?: Blob, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<AnalyzeTextResponse>;
-    public apiCalculationsAnalyzeFilePost(file?: Blob, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<AnalyzeTextResponse>>;
-    public apiCalculationsAnalyzeFilePost(file?: Blob, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<AnalyzeTextResponse>>;
-    public apiCalculationsAnalyzeFilePost(file?: Blob, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
+    public apiVversionCalculationsAnalyzeFilePost(version: string, file?: Blob, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<AnalyzeTextResponse>;
+    public apiVversionCalculationsAnalyzeFilePost(version: string, file?: Blob, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<AnalyzeTextResponse>>;
+    public apiVversionCalculationsAnalyzeFilePost(version: string, file?: Blob, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<AnalyzeTextResponse>>;
+    public apiVversionCalculationsAnalyzeFilePost(version: string, file?: Blob, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
+        if (version === null || version === undefined) {
+            throw new Error('Required parameter version was null or undefined when calling apiVversionCalculationsAnalyzeFilePost.');
+        }
 
         let headers = this.defaultHeaders;
 
@@ -153,7 +157,7 @@ export class CalculationsService {
             responseType = 'text';
         }
 
-        return this.httpClient.post<AnalyzeTextResponse>(`${this.configuration.basePath}/api/Calculations/AnalyzeFile`,
+        return this.httpClient.post<AnalyzeTextResponse>(`${this.configuration.basePath}/api/v${encodeURIComponent(String(version))}/Calculations/AnalyzeFile`,
             convertFormParamsToString ? formParams.toString() : formParams,
             {
                 responseType: <any>responseType,
@@ -166,14 +170,18 @@ export class CalculationsService {
     }
 
     /**
+     * @param version 
      * @param analyzeTextRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiCalculationsAnalyzeTextPost(analyzeTextRequest?: AnalyzeTextRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<AnalyzeTextResponse>;
-    public apiCalculationsAnalyzeTextPost(analyzeTextRequest?: AnalyzeTextRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<AnalyzeTextResponse>>;
-    public apiCalculationsAnalyzeTextPost(analyzeTextRequest?: AnalyzeTextRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<AnalyzeTextResponse>>;
-    public apiCalculationsAnalyzeTextPost(analyzeTextRequest?: AnalyzeTextRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
+    public apiVversionCalculationsAnalyzeTextPost(version: string, analyzeTextRequest?: AnalyzeTextRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<AnalyzeTextResponse>;
+    public apiVversionCalculationsAnalyzeTextPost(version: string, analyzeTextRequest?: AnalyzeTextRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<AnalyzeTextResponse>>;
+    public apiVversionCalculationsAnalyzeTextPost(version: string, analyzeTextRequest?: AnalyzeTextRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<AnalyzeTextResponse>>;
+    public apiVversionCalculationsAnalyzeTextPost(version: string, analyzeTextRequest?: AnalyzeTextRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
+        if (version === null || version === undefined) {
+            throw new Error('Required parameter version was null or undefined when calling apiVversionCalculationsAnalyzeTextPost.');
+        }
 
         let headers = this.defaultHeaders;
 
@@ -208,7 +216,7 @@ export class CalculationsService {
             responseType = 'text';
         }
 
-        return this.httpClient.post<AnalyzeTextResponse>(`${this.configuration.basePath}/api/Calculations/AnalyzeText`,
+        return this.httpClient.post<AnalyzeTextResponse>(`${this.configuration.basePath}/api/v${encodeURIComponent(String(version))}/Calculations/AnalyzeText`,
             analyzeTextRequest,
             {
                 responseType: <any>responseType,

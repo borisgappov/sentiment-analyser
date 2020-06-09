@@ -103,14 +103,18 @@ export class WordsService {
     }
 
     /**
+     * @param version 
      * @param key 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiWordsDelete(key?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<WordModel>;
-    public apiWordsDelete(key?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<WordModel>>;
-    public apiWordsDelete(key?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<WordModel>>;
-    public apiWordsDelete(key?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
+    public apiVversionWordsDelete(version: string, key?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<WordModel>;
+    public apiVversionWordsDelete(version: string, key?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<WordModel>>;
+    public apiVversionWordsDelete(version: string, key?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<WordModel>>;
+    public apiVversionWordsDelete(version: string, key?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
+        if (version === null || version === undefined) {
+            throw new Error('Required parameter version was null or undefined when calling apiVversionWordsDelete.');
+        }
 
         let headers = this.defaultHeaders;
 
@@ -153,7 +157,7 @@ export class WordsService {
             responseType = 'text';
         }
 
-        return this.httpClient.delete<WordModel>(`${this.configuration.basePath}/api/Words`,
+        return this.httpClient.delete<WordModel>(`${this.configuration.basePath}/api/v${encodeURIComponent(String(version))}/Words`,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,
@@ -165,6 +169,7 @@ export class WordsService {
     }
 
     /**
+     * @param version 
      * @param requireTotalCount 
      * @param requireGroupCount 
      * @param isCountQuery 
@@ -189,10 +194,13 @@ export class WordsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiWordsGet(requireTotalCount?: boolean, requireGroupCount?: boolean, isCountQuery?: boolean, skip?: number, take?: number, sort?: Array<SortingInfo>, group?: Array<GroupingInfo>, filter?: Array<object>, totalSummary?: Array<SummaryInfo>, groupSummary?: Array<SummaryInfo>, select?: Array<string>, preSelect?: Array<string>, remoteSelect?: boolean, remoteGrouping?: boolean, expandLinqSumType?: boolean, primaryKey?: Array<string>, defaultSort?: string, stringToLower?: boolean, paginateViaPrimaryKey?: boolean, sortByPrimaryKey?: boolean, allowAsyncOverSync?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<WordModelLoadResponse>;
-    public apiWordsGet(requireTotalCount?: boolean, requireGroupCount?: boolean, isCountQuery?: boolean, skip?: number, take?: number, sort?: Array<SortingInfo>, group?: Array<GroupingInfo>, filter?: Array<object>, totalSummary?: Array<SummaryInfo>, groupSummary?: Array<SummaryInfo>, select?: Array<string>, preSelect?: Array<string>, remoteSelect?: boolean, remoteGrouping?: boolean, expandLinqSumType?: boolean, primaryKey?: Array<string>, defaultSort?: string, stringToLower?: boolean, paginateViaPrimaryKey?: boolean, sortByPrimaryKey?: boolean, allowAsyncOverSync?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<WordModelLoadResponse>>;
-    public apiWordsGet(requireTotalCount?: boolean, requireGroupCount?: boolean, isCountQuery?: boolean, skip?: number, take?: number, sort?: Array<SortingInfo>, group?: Array<GroupingInfo>, filter?: Array<object>, totalSummary?: Array<SummaryInfo>, groupSummary?: Array<SummaryInfo>, select?: Array<string>, preSelect?: Array<string>, remoteSelect?: boolean, remoteGrouping?: boolean, expandLinqSumType?: boolean, primaryKey?: Array<string>, defaultSort?: string, stringToLower?: boolean, paginateViaPrimaryKey?: boolean, sortByPrimaryKey?: boolean, allowAsyncOverSync?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<WordModelLoadResponse>>;
-    public apiWordsGet(requireTotalCount?: boolean, requireGroupCount?: boolean, isCountQuery?: boolean, skip?: number, take?: number, sort?: Array<SortingInfo>, group?: Array<GroupingInfo>, filter?: Array<object>, totalSummary?: Array<SummaryInfo>, groupSummary?: Array<SummaryInfo>, select?: Array<string>, preSelect?: Array<string>, remoteSelect?: boolean, remoteGrouping?: boolean, expandLinqSumType?: boolean, primaryKey?: Array<string>, defaultSort?: string, stringToLower?: boolean, paginateViaPrimaryKey?: boolean, sortByPrimaryKey?: boolean, allowAsyncOverSync?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
+    public apiVversionWordsGet(version: string, requireTotalCount?: boolean, requireGroupCount?: boolean, isCountQuery?: boolean, skip?: number, take?: number, sort?: Array<SortingInfo>, group?: Array<GroupingInfo>, filter?: Array<object>, totalSummary?: Array<SummaryInfo>, groupSummary?: Array<SummaryInfo>, select?: Array<string>, preSelect?: Array<string>, remoteSelect?: boolean, remoteGrouping?: boolean, expandLinqSumType?: boolean, primaryKey?: Array<string>, defaultSort?: string, stringToLower?: boolean, paginateViaPrimaryKey?: boolean, sortByPrimaryKey?: boolean, allowAsyncOverSync?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<WordModelLoadResponse>;
+    public apiVversionWordsGet(version: string, requireTotalCount?: boolean, requireGroupCount?: boolean, isCountQuery?: boolean, skip?: number, take?: number, sort?: Array<SortingInfo>, group?: Array<GroupingInfo>, filter?: Array<object>, totalSummary?: Array<SummaryInfo>, groupSummary?: Array<SummaryInfo>, select?: Array<string>, preSelect?: Array<string>, remoteSelect?: boolean, remoteGrouping?: boolean, expandLinqSumType?: boolean, primaryKey?: Array<string>, defaultSort?: string, stringToLower?: boolean, paginateViaPrimaryKey?: boolean, sortByPrimaryKey?: boolean, allowAsyncOverSync?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<WordModelLoadResponse>>;
+    public apiVversionWordsGet(version: string, requireTotalCount?: boolean, requireGroupCount?: boolean, isCountQuery?: boolean, skip?: number, take?: number, sort?: Array<SortingInfo>, group?: Array<GroupingInfo>, filter?: Array<object>, totalSummary?: Array<SummaryInfo>, groupSummary?: Array<SummaryInfo>, select?: Array<string>, preSelect?: Array<string>, remoteSelect?: boolean, remoteGrouping?: boolean, expandLinqSumType?: boolean, primaryKey?: Array<string>, defaultSort?: string, stringToLower?: boolean, paginateViaPrimaryKey?: boolean, sortByPrimaryKey?: boolean, allowAsyncOverSync?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<WordModelLoadResponse>>;
+    public apiVversionWordsGet(version: string, requireTotalCount?: boolean, requireGroupCount?: boolean, isCountQuery?: boolean, skip?: number, take?: number, sort?: Array<SortingInfo>, group?: Array<GroupingInfo>, filter?: Array<object>, totalSummary?: Array<SummaryInfo>, groupSummary?: Array<SummaryInfo>, select?: Array<string>, preSelect?: Array<string>, remoteSelect?: boolean, remoteGrouping?: boolean, expandLinqSumType?: boolean, primaryKey?: Array<string>, defaultSort?: string, stringToLower?: boolean, paginateViaPrimaryKey?: boolean, sortByPrimaryKey?: boolean, allowAsyncOverSync?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
+        if (version === null || version === undefined) {
+            throw new Error('Required parameter version was null or undefined when calling apiVversionWordsGet.');
+        }
 
         let queryParameters = new HttpParams({encoder: this.encoder});
         if (requireTotalCount !== undefined && requireTotalCount !== null) {
@@ -318,7 +326,7 @@ export class WordsService {
             responseType = 'text';
         }
 
-        return this.httpClient.get<WordModelLoadResponse>(`${this.configuration.basePath}/api/Words`,
+        return this.httpClient.get<WordModelLoadResponse>(`${this.configuration.basePath}/api/v${encodeURIComponent(String(version))}/Words`,
             {
                 params: queryParameters,
                 responseType: <any>responseType,
@@ -331,14 +339,18 @@ export class WordsService {
     }
 
     /**
+     * @param version 
      * @param values 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiWordsPost(values?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<WordModel>;
-    public apiWordsPost(values?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<WordModel>>;
-    public apiWordsPost(values?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<WordModel>>;
-    public apiWordsPost(values?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
+    public apiVversionWordsPost(version: string, values?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<WordModel>;
+    public apiVversionWordsPost(version: string, values?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<WordModel>>;
+    public apiVversionWordsPost(version: string, values?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<WordModel>>;
+    public apiVversionWordsPost(version: string, values?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
+        if (version === null || version === undefined) {
+            throw new Error('Required parameter version was null or undefined when calling apiVversionWordsPost.');
+        }
 
         let headers = this.defaultHeaders;
 
@@ -381,7 +393,7 @@ export class WordsService {
             responseType = 'text';
         }
 
-        return this.httpClient.post<WordModel>(`${this.configuration.basePath}/api/Words`,
+        return this.httpClient.post<WordModel>(`${this.configuration.basePath}/api/v${encodeURIComponent(String(version))}/Words`,
             convertFormParamsToString ? formParams.toString() : formParams,
             {
                 responseType: <any>responseType,
@@ -394,15 +406,19 @@ export class WordsService {
     }
 
     /**
+     * @param version 
      * @param key 
      * @param values 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiWordsPut(key?: number, values?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<WordModel>;
-    public apiWordsPut(key?: number, values?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<WordModel>>;
-    public apiWordsPut(key?: number, values?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<WordModel>>;
-    public apiWordsPut(key?: number, values?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
+    public apiVversionWordsPut(version: string, key?: number, values?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<WordModel>;
+    public apiVversionWordsPut(version: string, key?: number, values?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<WordModel>>;
+    public apiVversionWordsPut(version: string, key?: number, values?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<WordModel>>;
+    public apiVversionWordsPut(version: string, key?: number, values?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
+        if (version === null || version === undefined) {
+            throw new Error('Required parameter version was null or undefined when calling apiVversionWordsPut.');
+        }
 
         let headers = this.defaultHeaders;
 
@@ -448,7 +464,7 @@ export class WordsService {
             responseType = 'text';
         }
 
-        return this.httpClient.put<WordModel>(`${this.configuration.basePath}/api/Words`,
+        return this.httpClient.put<WordModel>(`${this.configuration.basePath}/api/v${encodeURIComponent(String(version))}/Words`,
             convertFormParamsToString ? formParams.toString() : formParams,
             {
                 responseType: <any>responseType,

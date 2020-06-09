@@ -4,6 +4,8 @@ import { SentimentRating } from '../../generated/api-client/model/sentimentRatin
 import { Tools } from '../utils';
 import { AntiForgeryTokenService } from 'src/generated/api-client';
 import { PlatformLocation } from '@angular/common';
+import { environment } from 'src/environments/environment';
+import { AuthorizeService } from 'src/api-authorization/authorize.service';
 
 @Component({
   selector: 'app-lexicon',
@@ -13,14 +15,16 @@ import { PlatformLocation } from '@angular/common';
 export class LexiconComponent implements OnInit {
 
   dataSource: any;
-  url = '/api/Words';
+  url = `/api/v${environment.apiVersion}/Words`;
   _window = window;
   sentimentRatings = Tools.EnumToArray(SentimentRating);
   antiForgeryToken = '';
+  token = '';
 
   constructor(
     private antiForgeryTokenService: AntiForgeryTokenService,
-    private platformLocation: PlatformLocation
+    private platformLocation: PlatformLocation,
+    private authorize: AuthorizeService
   ) {
     antiForgeryTokenService.configuration.basePath = (platformLocation as any).location.origin;
   }
@@ -28,8 +32,10 @@ export class LexiconComponent implements OnInit {
   ngOnInit(): void {
 
     this.antiForgeryTokenService
-      .apiAntiForgeryTokenGet()
+      .apiVversionAntiForgeryTokenGet(environment.apiVersion)
       .subscribe(x => this.antiForgeryToken = x);
+
+    this.authorize.getAccessToken().subscribe(x => this.token = x);
 
     this.dataSource = AspNetData.createStore({
       key: 'id',
@@ -39,7 +45,10 @@ export class LexiconComponent implements OnInit {
       deleteUrl: this.url,
       onBeforeSend: (method, ajaxOptions) => {
         ajaxOptions.xhrFields = { withCredentials: true };
-        ajaxOptions.headers = { 'RequestVerificationToken': this.antiForgeryToken };
+        ajaxOptions.headers = {
+          'Authorization': `Bearer ${this.token}`,
+          'RequestVerificationToken': this.antiForgeryToken
+        };
         if (ajaxOptions.data.values) {
           const values = JSON.parse(ajaxOptions.data.values);
           if (values.sentiment !== undefined) {
@@ -50,5 +59,4 @@ export class LexiconComponent implements OnInit {
       }
     });
   }
-
 }

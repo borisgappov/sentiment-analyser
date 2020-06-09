@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace SentimentAnalyser.Controllers
 {
     [ApiController]
-    [Route("api/AntiForgeryToken")]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    [ApiVersion("1.0")]
     public class AntiForgeryTokenController : ControllerBase
     {
         private readonly IAntiforgery _xsrf;

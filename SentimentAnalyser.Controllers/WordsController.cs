@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using DevExtreme.AspNet.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SentimentAnalyser.Data;
@@ -11,8 +12,9 @@ using SentimentAnalyser.Models.Entities;
 
 namespace SentimentAnalyser.Controllers
 {
-    [Route("api/[controller]")]
-    //[Authorize]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    [ApiVersion("1.0")]
+    [Authorize]
     [ApiController]
     public class WordsController : ControllerBase
     {

@@ -15,13 +15,19 @@
   <dxo-group-panel [visible]="true"></dxo-group-panel>
 
 
-  <dxi-column dataField="text" caption="Word">
+  <dxi-column dataField="text" caption="Word" cellTemplate="cellTemplate">
     <dxi-validation-rule type="required"></dxi-validation-rule>
   </dxi-column>
   <dxi-column dataField="sentiment" caption="Sentiment rating" dataType="number">
     <dxo-lookup [dataSource]="sentimentRatings" valueExpr="id" displayExpr="text"> </dxo-lookup>
     <dxi-validation-rule type="required"></dxi-validation-rule>
   </dxi-column>
+
+  <div *dxTemplate="let data of 'cellTemplate'">
+    <span [ngClass]="{'thin-red': data.data.sentiment < 0, 'thin-green': data.data.sentiment > 0}">
+      &nbsp;{{data.value}}&nbsp;
+    </span>
+  </div>
 
   <dxo-editing mode="popup" [allowUpdating]="true" [allowDeleting]="true" [allowAdding]="true">
     <dxo-popup title="Add or edit word" [showTitle]="true" [maxWidth]="400" [height]="300"

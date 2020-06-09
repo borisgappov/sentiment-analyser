@@ -4,6 +4,7 @@ import { CalculationsService, AnalyzeTextRequest, AnalyzeTextResponse } from '..
 import { PlatformLocation } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import notify from 'devextreme/ui/notify';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-calculation',
@@ -17,7 +18,7 @@ export class CalculationComponent implements OnInit {
   textPopupVisible = false;
   filePopupVisible = false;
   textAreaValue = '';
-  uploadUrl = '/api/Calculations/AnalyzeFile';
+  uploadUrl = `/api/v${environment.apiVersion}/Calculations/AnalyzeFile`;
   uploading = false;
   resultHtml: SafeHtml;
   score = 0;
@@ -47,9 +48,11 @@ export class CalculationComponent implements OnInit {
     if (this.textAreaValue.trim().length === 0) {
       notify('Please enter text', 'warning', 3000);
     } else {
-      this.calcService.apiCalculationsAnalyzeTextPost({
-        text: this.textAreaValue
-      } as AnalyzeTextRequest)
+      this.calcService.apiVversionCalculationsAnalyzeTextPost(
+        environment.apiVersion,
+        {
+          text: this.textAreaValue
+        } as AnalyzeTextRequest)
         .subscribe(x => {
           this.resultHtml = this.sanitizer.bypassSecurityTrustHtml(x.html);
           this.score = x.score;

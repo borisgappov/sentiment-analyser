@@ -40,7 +40,8 @@ namespace SentimentAnalyser
             services.AddAuthentication().AddIdentityServerJwt();
             services.AddControllersWithViews();
             services.AddRazorPages();
-
+            
+            services.AddApiVersioning();
             if (_env.IsDevelopment())
                 services.AddSwaggerGen(options =>
                 {

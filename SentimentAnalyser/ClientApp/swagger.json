@@ -5,10 +5,20 @@
     "version": "v1"
   },
   "paths": {
-    "/api/AntiForgeryToken": {
+    "/api/v{version}/AntiForgeryToken": {
       "get": {
         "tags": [
           "AntiForgeryToken"
+        ],
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -34,10 +44,20 @@
         }
       }
     },
-    "/api/Calculations/AnalyzeFile": {
+    "/api/v{version}/Calculations/AnalyzeFile": {
       "post": {
         "tags": [
           "Calculations"
+        ],
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ],
         "requestBody": {
           "content": {
@@ -84,10 +104,20 @@
         }
       }
     },
-    "/api/Calculations/AnalyzeText": {
+    "/api/v{version}/Calculations/AnalyzeText": {
       "post": {
         "tags": [
           "Calculations"
+        ],
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ],
         "requestBody": {
           "content": {
@@ -155,7 +185,7 @@
         }
       }
     },
-    "/api/Words": {
+    "/api/v{version}/Words": {
       "get": {
         "tags": [
           "Words"
@@ -349,6 +379,14 @@
             "schema": {
               "type": "boolean"
             }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -377,6 +415,16 @@
       "put": {
         "tags": [
           "Words"
+        ],
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ],
         "requestBody": {
           "content": {
@@ -432,6 +480,16 @@
         "tags": [
           "Words"
         ],
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -478,6 +536,16 @@
       "delete": {
         "tags": [
           "Words"
+        ],
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ],
         "requestBody": {
           "content": {

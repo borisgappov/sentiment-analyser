@@ -85,13 +85,17 @@ export class AntiForgeryTokenService {
     }
 
     /**
+     * @param version 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiAntiForgeryTokenGet(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<string>;
-    public apiAntiForgeryTokenGet(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<string>>;
-    public apiAntiForgeryTokenGet(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<string>>;
-    public apiAntiForgeryTokenGet(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
+    public apiVversionAntiForgeryTokenGet(version: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<string>;
+    public apiVversionAntiForgeryTokenGet(version: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<string>>;
+    public apiVversionAntiForgeryTokenGet(version: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<string>>;
+    public apiVversionAntiForgeryTokenGet(version: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
+        if (version === null || version === undefined) {
+            throw new Error('Required parameter version was null or undefined when calling apiVversionAntiForgeryTokenGet.');
+        }
 
         let headers = this.defaultHeaders;
 
@@ -115,7 +119,7 @@ export class AntiForgeryTokenService {
             responseType = 'text';
         }
 
-        return this.httpClient.get<string>(`${this.configuration.basePath}/api/AntiForgeryToken`,
+        return this.httpClient.get<string>(`${this.configuration.basePath}/api/v${encodeURIComponent(String(version))}/AntiForgeryToken`,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,
