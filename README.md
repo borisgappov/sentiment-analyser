@@ -10,3 +10,8 @@
 - Run `npm start` ( because of a .net core 3 + Angular 9 bug please start the client manually https://github.com/dotnet/aspnetcore/issues/17277)
 - Open https://localhost:44300/
 - Open swagger document https://localhost:44300/swagger
+
+### Prepopulated user
+
+login: user@host.com
+password: 1qaz@WSX
