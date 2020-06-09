@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="faker.net" Version="1.3.77" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
+    <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="16.6.1" />
+    <PackageReference Include="moq" Version="4.14.1" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SentimentAnalyser.Data\SentimentAnalyser.Data.csproj" />
+    <ProjectReference Include="..\SentimentAnalyser.Models.UnitTests.Fakes\SentimentAnalyser.Models.UnitTests.Fakes.csproj" />
+    <ProjectReference Include="..\SentimentAnalyser.Models\SentimentAnalyser.Models.csproj" />
+  </ItemGroup>
+
+</Project>

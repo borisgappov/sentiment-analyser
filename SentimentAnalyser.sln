@@ -15,7 +15,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SentimentAnalyser.Business"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SentimentAnalyser.Controllers", "SentimentAnalyser.Controllers\SentimentAnalyser.Controllers.csproj", "{2CF27A7E-D698-4AC6-B589-3018A1975CA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SentimentAnalyzer.Utils", "SentimentAnalyzer.Utils\SentimentAnalyzer.Utils.csproj", "{6EDF48DA-7FA6-4189-B3D7-06FFBB4DE5B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SentimentAnalyzer.Utils", "SentimentAnalyzer.Utils\SentimentAnalyzer.Utils.csproj", "{6EDF48DA-7FA6-4189-B3D7-06FFBB4DE5B9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SentimentAnalyser.Models.UnitTests.Fakes", "SentimentAnalyser.Models.UnitTests.Fakes\SentimentAnalyser.Models.UnitTests.Fakes.csproj", "{15CCBF21-8829-40D6-A516-EB1634F0CF03}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{006EDBE5-0203-482D-8C76-215D0E812E53}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SentimentAnalyser.Models.UnitTests", "SentimentAnalyser.Models.UnitTests\SentimentAnalyser.Models.UnitTests.csproj", "{5EDCF5D9-041B-411A-899A-0E7C155B18D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SentimentAnalyser.Utils.UnitTests", "SentimentAnalyser.Utils.UnitTests\SentimentAnalyser.Utils.UnitTests.csproj", "{4756541B-2296-4963-B914-2B8DB1A31A56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SentimentAnalyser.Controllers.UnitTests", "SentimentAnalyser.Controllers.UnitTests\SentimentAnalyser.Controllers.UnitTests.csproj", "{72B8EF54-5642-4E12-8F2E-783CEAFBE7FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SentimentAnalyzer.Data.UnitTests", "SentimentAnalyzer.Data.UnitTests\SentimentAnalyzer.Data.UnitTests.csproj", "{B4BAB995-A38D-4BC5-A2DD-8B7791F64345}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SentimentAnalyzer.Business.UnitTests", "SentimentAnalyzer.Business.UnitTests\SentimentAnalyzer.Business.UnitTests.csproj", "{E801B7FE-68CF-49AC-B175-755487BCBD20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,9 +65,41 @@ Global
 		{6EDF48DA-7FA6-4189-B3D7-06FFBB4DE5B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EDF48DA-7FA6-4189-B3D7-06FFBB4DE5B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EDF48DA-7FA6-4189-B3D7-06FFBB4DE5B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15CCBF21-8829-40D6-A516-EB1634F0CF03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15CCBF21-8829-40D6-A516-EB1634F0CF03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15CCBF21-8829-40D6-A516-EB1634F0CF03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15CCBF21-8829-40D6-A516-EB1634F0CF03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EDCF5D9-041B-411A-899A-0E7C155B18D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EDCF5D9-041B-411A-899A-0E7C155B18D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EDCF5D9-041B-411A-899A-0E7C155B18D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EDCF5D9-041B-411A-899A-0E7C155B18D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4756541B-2296-4963-B914-2B8DB1A31A56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4756541B-2296-4963-B914-2B8DB1A31A56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4756541B-2296-4963-B914-2B8DB1A31A56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4756541B-2296-4963-B914-2B8DB1A31A56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72B8EF54-5642-4E12-8F2E-783CEAFBE7FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72B8EF54-5642-4E12-8F2E-783CEAFBE7FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72B8EF54-5642-4E12-8F2E-783CEAFBE7FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72B8EF54-5642-4E12-8F2E-783CEAFBE7FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4BAB995-A38D-4BC5-A2DD-8B7791F64345}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4BAB995-A38D-4BC5-A2DD-8B7791F64345}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4BAB995-A38D-4BC5-A2DD-8B7791F64345}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4BAB995-A38D-4BC5-A2DD-8B7791F64345}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E801B7FE-68CF-49AC-B175-755487BCBD20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E801B7FE-68CF-49AC-B175-755487BCBD20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E801B7FE-68CF-49AC-B175-755487BCBD20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E801B7FE-68CF-49AC-B175-755487BCBD20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{15CCBF21-8829-40D6-A516-EB1634F0CF03} = {006EDBE5-0203-482D-8C76-215D0E812E53}
+		{5EDCF5D9-041B-411A-899A-0E7C155B18D5} = {006EDBE5-0203-482D-8C76-215D0E812E53}
+		{4756541B-2296-4963-B914-2B8DB1A31A56} = {006EDBE5-0203-482D-8C76-215D0E812E53}
+		{72B8EF54-5642-4E12-8F2E-783CEAFBE7FA} = {006EDBE5-0203-482D-8C76-215D0E812E53}
+		{B4BAB995-A38D-4BC5-A2DD-8B7791F64345} = {006EDBE5-0203-482D-8C76-215D0E812E53}
+		{E801B7FE-68CF-49AC-B175-755487BCBD20} = {006EDBE5-0203-482D-8C76-215D0E812E53}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {18CE0531-0688-4A80-A4B3-C1332789730A}
