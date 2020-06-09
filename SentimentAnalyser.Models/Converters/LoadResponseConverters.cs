@@ -1,7 +1,8 @@
 ﻿using System.Linq;
 using DevExtreme.AspNet.Data.ResponseModel;
 using SentimentAnalyser.Models.Entities;
-using SentimentAnalyser.Infrastructure.Extensions;
+using SentimentAnalyser.Utils;
+
 
 namespace SentimentAnalyser.Models.Converters
 {

@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SentimentAnalyser.Infrastructure\SentimentAnalyser.Infrastructure.csproj" />
     <ProjectReference Include="..\SentimentAnalyser.Models\SentimentAnalyser.Models.csproj" />
   </ItemGroup>
 

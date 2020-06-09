@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace SentimentAnalyser.Infrastructure.Extensions
+namespace SentimentAnalyser.Utils
 {
     public static class StringExtensions
     {

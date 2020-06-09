@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SentimentAnalyser.Infrastructure\SentimentAnalyser.Infrastructure.csproj" />
+    <ProjectReference Include="..\SentimentAnalyzer.Utils\SentimentAnalyzer.Utils.csproj" />
   </ItemGroup>
 
   <ItemGroup>

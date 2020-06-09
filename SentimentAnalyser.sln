@@ -5,15 +5,17 @@ VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SentimentAnalyser", "SentimentAnalyser\SentimentAnalyser.csproj", "{504438FC-A8B9-4AD9-9D45-45E75BED357A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SentimentAnalyser.Models", "SentimentAnalyser.Models\SentimentAnalyser.Models.csproj", "{13F24637-6119-47FF-9725-39FBB52FA83F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SentimentAnalyser.Models", "SentimentAnalyser.Models\SentimentAnalyser.Models.csproj", "{13F24637-6119-47FF-9725-39FBB52FA83F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SentimentAnalyser.Infrastructure", "SentimentAnalyser.Infrastructure\SentimentAnalyser.Infrastructure.csproj", "{1932E1C4-17EF-4F56-9BF6-F812FBF8B11D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SentimentAnalyser.Infrastructure", "SentimentAnalyser.Infrastructure\SentimentAnalyser.Infrastructure.csproj", "{1932E1C4-17EF-4F56-9BF6-F812FBF8B11D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SentimentAnalyser.Data", "SentimentAnalyser.Data\SentimentAnalyser.Data.csproj", "{16298298-3096-471B-BAB7-0F2FF18FDC28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SentimentAnalyser.Data", "SentimentAnalyser.Data\SentimentAnalyser.Data.csproj", "{16298298-3096-471B-BAB7-0F2FF18FDC28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SentimentAnalyser.Business", "SentimentAnalyser.Business\SentimentAnalyser.Business.csproj", "{1922FE7F-136D-470C-BD41-73B0E0C87A3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SentimentAnalyser.Business", "SentimentAnalyser.Business\SentimentAnalyser.Business.csproj", "{1922FE7F-136D-470C-BD41-73B0E0C87A3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SentimentAnalyser.Controllers", "SentimentAnalyser.Controllers\SentimentAnalyser.Controllers.csproj", "{2CF27A7E-D698-4AC6-B589-3018A1975CA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SentimentAnalyser.Controllers", "SentimentAnalyser.Controllers\SentimentAnalyser.Controllers.csproj", "{2CF27A7E-D698-4AC6-B589-3018A1975CA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SentimentAnalyzer.Utils", "SentimentAnalyzer.Utils\SentimentAnalyzer.Utils.csproj", "{6EDF48DA-7FA6-4189-B3D7-06FFBB4DE5B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{2CF27A7E-D698-4AC6-B589-3018A1975CA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CF27A7E-D698-4AC6-B589-3018A1975CA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CF27A7E-D698-4AC6-B589-3018A1975CA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EDF48DA-7FA6-4189-B3D7-06FFBB4DE5B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EDF48DA-7FA6-4189-B3D7-06FFBB4DE5B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EDF48DA-7FA6-4189-B3D7-06FFBB4DE5B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EDF48DA-7FA6-4189-B3D7-06FFBB4DE5B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

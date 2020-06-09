@@ -7,29 +7,45 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using SentimentAnalyser.Data;
+using SentimentAnalyser.Infrastructure.Config;
+using SentimentAnalyser.Infrastructure.Middlewares;
 using SentimentAnalyser.Infrastructure.Swagger;
 using SentimentAnalyser.Models.Converters;
 using SentimentAnalyser.Models.Entities;
+using Serilog;
 
 namespace SentimentAnalyser
 {
     public class Startup
     {
+        private readonly IConfigurationRoot _configuration;
         private readonly IWebHostEnvironment _env;
 
-        public Startup(IConfiguration configuration, IWebHostEnvironment env)
+        public Startup(IWebHostEnvironment env)
         {
-            Configuration = configuration;
+            _configuration = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
+                .AddEnvironmentVariables()
+                .Build();
+
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(_configuration)
+                .CreateLogger();
+
             _env = env;
         }
 
-        public IConfiguration Configuration { get; }
-
-
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(Log.Logger);
+
+            var connectionStringResolver = new ConnectionStringResolver(_configuration);
+            services.AddSingleton(connectionStringResolver);
+
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(connectionStringResolver.GetConnectionString()));
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -40,7 +56,11 @@ namespace SentimentAnalyser
             services.AddAuthentication().AddIdentityServerJwt();
             services.AddControllersWithViews();
             services.AddRazorPages();
-            
+
+            services.AddServices();
+            services.MapRepositories();
+            services.AddManagers();
+
             services.AddApiVersioning();
             if (_env.IsDevelopment())
                 services.AddSwaggerGen(options =>
@@ -67,6 +87,7 @@ namespace SentimentAnalyser
                 app.UseHsts();
             }
 
+            app.UseMiddleware<ExceptionMiddleware>();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

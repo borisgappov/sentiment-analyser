@@ -11,10 +11,11 @@ namespace SentimentAnalyser.Data
 {
     public class MigratorHostedService : IHostedService
     {
-        private readonly IServiceProvider _serviceProvider;
-        private SignInManager<ApplicationUser> _signInManager;
-        private readonly string _userName = "user@host.com";
         private readonly string _password = "1qaz@WSX";
+        private readonly IServiceProvider _serviceProvider;
+        private readonly string _userName = "user@host.com";
+        private SignInManager<ApplicationUser> _signInManager;
+
         public MigratorHostedService(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
@@ -25,17 +26,17 @@ namespace SentimentAnalyser.Data
             using (var serviceScope = _serviceProvider.CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                await context.Database.EnsureCreatedAsync().ConfigureAwait(false);
+                await context.Database.EnsureCreatedAsync();
 
                 _signInManager = serviceScope.ServiceProvider.GetRequiredService<SignInManager<ApplicationUser>>();
 
-                if (await context.Users.CountAsync().ConfigureAwait(false) == 0)
+                if (await context.Users.CountAsync() == 0)
                     await _signInManager.UserManager.CreateAsync(new ApplicationUser
                     {
                         UserName = _userName,
                         Email = _userName,
                         EmailConfirmed = true
-                    }, _password).ConfigureAwait(false);
+                    }, _password);
             }
         }
 

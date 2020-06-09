@@ -4,4 +4,15 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.6.1" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.24" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SentimentAnalyser.Data\SentimentAnalyser.Data.csproj" />
+    <ProjectReference Include="..\SentimentAnalyser.Infrastructure\SentimentAnalyser.Infrastructure.csproj" />
+    <ProjectReference Include="..\SentimentAnalyser.Models\SentimentAnalyser.Models.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,14 +1,10 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using DevExtreme.AspNet.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using SentimentAnalyser.Data;
-using SentimentAnalyser.Infrastructure.Extensions;
+using SentimentAnalyser.Business.Interfaces;
 using SentimentAnalyser.Models;
 using SentimentAnalyser.Models.Converters;
-using SentimentAnalyser.Models.Entities;
 
 namespace SentimentAnalyser.Controllers
 {
@@ -18,11 +14,11 @@ namespace SentimentAnalyser.Controllers
     [ApiController]
     public class WordsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IWordManager _wordManager;
 
-        public WordsController(ApplicationDbContext context)
+        public WordsController(IWordManager wordManager)
         {
-            _context = context;
+            _wordManager = wordManager;
         }
 
         /// <summary>
@@ -37,68 +33,29 @@ namespace SentimentAnalyser.Controllers
             [FromQuery] DataSourceLoadOptionsBase loadOptions
         )
         {
-            return (await DataSourceLoader.LoadAsync(_context.Words, loadOptions))
-                .ToResponse<WordModel>();
+            return (await _wordManager.DataSourceLoad(loadOptions)).ToResponse<WordModel>();
         }
 
         [HttpPut]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult<WordModel>> PutWord([FromForm] int key, [FromForm] string values)
         {
-            var word = await _context.Words.FindAsync(key);
-            values.Populate(word);
-            _context.Entry(word).State = EntityState.Modified;
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!WordExists(key))
-                    return NotFound();
-                throw;
-            }
-
-            return word.ToModel();
+            return (await _wordManager.UpdateAsync(key, values)).ToModel();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult<WordModel>> PostWord([FromForm] string values)
         {
-            var word = values.Populate<Word>();
-            _context.Words.Add(word);
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (WordExists(word.Id))
-                    return Conflict();
-                throw;
-            }
-
-            return word.ToModel();
+            return (await _wordManager.CreateAsync(values)).ToModel();
         }
 
         [HttpDelete]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult<WordModel>> DeleteWord([FromForm] int key)
+        public async Task<ActionResult> DeleteWord([FromForm] int key)
         {
-            var word = await _context.Words.FindAsync(key);
-            if (word == null) return NotFound();
-
-            _context.Words.Remove(word);
-            await _context.SaveChangesAsync();
-
-            return word.ToModel();
-        }
-
-        private bool WordExists(int id)
-        {
-            return _context.Words.Any(e => e.Id == id);
+            await _wordManager.DeleteAsync(key);
+            return Ok();
         }
     }
 }

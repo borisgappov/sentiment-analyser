@@ -1,12 +1,12 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
 
-namespace SentimentAnalyser.Infrastructure.Extensions
+namespace SentimentAnalyser.Utils
 {
     public static class JsonExtensions
     {
         private static readonly string EmptyJson = "{}";
+
         public static string ToJSON(this object Object)
         {
             return JsonConvert.SerializeObject(Object, Formatting.Indented, new JsonSerializerSettings
@@ -20,7 +20,7 @@ namespace SentimentAnalyser.Infrastructure.Extensions
         {
             try
             {
-                return string.IsNullOrEmpty(JSON)
+                return JSON.IsEmpty()
                     ? DefaultValue
                     : (T) JsonConvert.DeserializeObject(JSON, typeof(T), settings);
             }
@@ -34,7 +34,7 @@ namespace SentimentAnalyser.Infrastructure.Extensions
         {
             try
             {
-                return string.IsNullOrEmpty(JSON) ? null : JObject.Parse(JSON);
+                return JSON.IsEmpty() ? null : JObject.Parse(JSON);
             }
             catch
             {
@@ -46,7 +46,7 @@ namespace SentimentAnalyser.Infrastructure.Extensions
         {
             try
             {
-                return string.IsNullOrEmpty(json)
+                return json.IsEmpty()
                     ? default
                     : (T) JsonConvert.DeserializeObject(json, typeof(T));
             }
