@@ -21,7 +21,7 @@ namespace SentimentAnalyser.Business.Managers
         {
         }
 
-        public async Task<LoadResult> DataSourceLoad(DataSourceLoadOptionsBase loadOptions)
+        public async Task<LoadResult> DataSourceLoadAsync(DataSourceLoadOptionsBase loadOptions)
         {
             using (var uow = _uowFactory.CreateUnitOfWork())
             {
@@ -32,11 +32,11 @@ namespace SentimentAnalyser.Business.Managers
         }
 
 
-        public Task<bool> Exists(string text)
+        public Task<bool> ExistsAsync(string text)
         {
             using (var uow = _uowFactory.CreateUnitOfWork())
             {
-                return uow.CreateRepository<IWordRepository>().Exists(text);
+                return uow.CreateRepository<IWordRepository>().ExistsAsync(text);
             }
         }
 
@@ -45,7 +45,7 @@ namespace SentimentAnalyser.Business.Managers
             using (var uow = _uowFactory.CreateUnitOfWork())
             {
                 var wordRepository = uow.CreateRepository<IWordRepository>();
-                if (await wordRepository.Exists(model.Text)) return false;
+                if (await wordRepository.ExistsAsync(model.Text)) return false;
 
                 wordRepository.Create(model);
                 await uow.SaveAsync();
@@ -54,7 +54,7 @@ namespace SentimentAnalyser.Business.Managers
             return true;
         }
 
-        public async Task<AnalyzeTextResponse> AnalyzeFile(IFormFile file)
+        public async Task<AnalyzeTextResponse> AnalyzeFileAsync(IFormFile file)
         {
             if (file != null)
             {
@@ -71,7 +71,7 @@ namespace SentimentAnalyser.Business.Managers
             return null;
         }
 
-        public async Task<AnalyzeTextResponse> AnalyzeText(AnalyzeTextRequest model)
+        public async Task<AnalyzeTextResponse> AnalyzeTextAsync(AnalyzeTextRequest model)
         {
             return await Analyze(model.Text);
         }

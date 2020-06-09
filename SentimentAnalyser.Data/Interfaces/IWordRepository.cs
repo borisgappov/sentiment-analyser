@@ -5,6 +5,6 @@ namespace SentimentAnalyser.Data.Interfaces
 {
     public interface IWordRepository : IGenericRepository<Word>
     {
-        Task<bool> Exists(string text);
+        Task<bool> ExistsAsync(string text);
     }
 }

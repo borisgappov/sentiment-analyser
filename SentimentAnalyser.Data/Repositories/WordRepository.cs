@@ -18,7 +18,7 @@ namespace SentimentAnalyser.Data.Repositories
         {
         }
 
-        public async Task<bool> Exists(string text)
+        public async Task<bool> ExistsAsync(string text)
         {
             return await _wordExists(_context, text) > 0;
         }

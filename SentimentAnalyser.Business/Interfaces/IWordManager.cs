@@ -9,14 +9,14 @@ namespace SentimentAnalyser.Business.Interfaces
 {
     public interface IWordManager : IGenericManager<Word>
     {
-        Task<bool> Exists(string text);
+        Task<bool> ExistsAsync(string text);
 
         Task<bool> AddAsync(Word model);
 
-        Task<AnalyzeTextResponse> AnalyzeFile(IFormFile file);
+        Task<AnalyzeTextResponse> AnalyzeFileAsync(IFormFile file);
 
-        Task<AnalyzeTextResponse> AnalyzeText(AnalyzeTextRequest model);
+        Task<AnalyzeTextResponse> AnalyzeTextAsync(AnalyzeTextRequest model);
 
-        Task<LoadResult> DataSourceLoad(DataSourceLoadOptionsBase loadOptions);
+        Task<LoadResult> DataSourceLoadAsync(DataSourceLoadOptionsBase loadOptions);
     }
 }

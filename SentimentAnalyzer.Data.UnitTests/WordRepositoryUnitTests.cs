@@ -22,14 +22,14 @@ namespace SentimentAnalyzer.Data.UnitTests
             TestDbContext.SaveChanges();
 
             // Act
-            var result = await new WordRepository(TestDbContext).Exists(sentece).ConfigureAwait(false);
+            var result = await new WordRepository(TestDbContext).ExistsAsync(sentece).ConfigureAwait(false);
 
             // Assert
             Assert.True(result);
 
             // if not exists
             // Act
-            result = await new WordRepository(TestDbContext).Exists(string.Empty).ConfigureAwait(false);
+            result = await new WordRepository(TestDbContext).ExistsAsync(string.Empty).ConfigureAwait(false);
 
             // Assert
             Assert.False(result);

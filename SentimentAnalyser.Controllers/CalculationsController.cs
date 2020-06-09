@@ -22,14 +22,14 @@ namespace SentimentAnalyser.Controllers
         [Route("AnalyzeFile")]
         public async Task<ActionResult<AnalyzeTextResponse>> AnalyzeFile(IFormFile file)
         {
-            return await _wordManager.AnalyzeFile(file);
+            return await _wordManager.AnalyzeFileAsync(file);
         }
 
         [HttpPost]
         [Route("AnalyzeText")]
         public async Task<ActionResult<AnalyzeTextResponse>> AnalyzeText([FromBody] AnalyzeTextRequest model)
         {
-            return await _wordManager.AnalyzeText(model);
+            return await _wordManager.AnalyzeTextAsync(model);
         }
     }
 }

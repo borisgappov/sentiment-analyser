@@ -33,7 +33,7 @@ namespace SentimentAnalyser.Controllers
             [FromQuery] DataSourceLoadOptionsBase loadOptions
         )
         {
-            return (await _wordManager.DataSourceLoad(loadOptions)).ToResponse<WordModel>();
+            return (await _wordManager.DataSourceLoadAsync(loadOptions)).ToResponse<WordModel>();
         }
 
         [HttpPut]

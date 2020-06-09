@@ -48,14 +48,14 @@ namespace SentimentAnalyser.Controllers.UnitTests
             };
 
             // Act
-            _wordManager.Setup(m => m.DataSourceLoad(loadOptions))
+            _wordManager.Setup(m => m.DataSourceLoadAsync(loadOptions))
                 .ReturnsAsync(loadResult)
                 .Verifiable();
 
             var result = await _wordsController.GetWords(loadOptions).ConfigureAwait(false);
 
             // Assert
-            _wordManager.Verify(m => m.DataSourceLoad(loadOptions), Times.Once);
+            _wordManager.Verify(m => m.DataSourceLoadAsync(loadOptions), Times.Once);
             Assert.Equal(typeof(ActionResult<LoadResponse<WordModel>>), result.GetType());
         }
     }

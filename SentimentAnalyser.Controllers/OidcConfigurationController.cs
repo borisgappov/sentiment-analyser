@@ -1,26 +1,26 @@
 ﻿using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace SentimentAnalyser.Controllers
 {
     public class OidcConfigurationController : Controller
     {
-        public OidcConfigurationController(IClientRequestParametersProvider clientRequestParametersProvider)
+        private readonly ILogger logger;
+
+        public OidcConfigurationController(IClientRequestParametersProvider clientRequestParametersProvider, ILogger _logger)
         {
             ClientRequestParametersProvider = clientRequestParametersProvider;
+            logger = _logger;
         }
 
         public IClientRequestParametersProvider ClientRequestParametersProvider { get; }
 
-        /// <summary>
-        ///     Use "SentimentAnalyser" as clientId
-        /// </summary>
-        /// <param name="clientId"></param>
-        /// <returns></returns>
         [HttpGet("_configuration/{clientId}")]
-        public IActionResult GetClientRequestParameters([FromRoute] string clientId)
+        public IActionResult GetClientRequestParameters([FromRoute]string clientId)
         {
-            return Ok(ClientRequestParametersProvider.GetClientParameters(HttpContext, clientId));
+            var parameters = ClientRequestParametersProvider.GetClientParameters(HttpContext, clientId);
+            return Ok(parameters);
         }
     }
 }
