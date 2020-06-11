@@ -10,7 +10,7 @@ namespace SentimentAnalyzer.Data.UnitTests
     public class WordRepositoryUnitTests : BaseRepositoryUnitTests
     {
         [Fact]
-        public async void GivenMatchIdAndUserId_RepositoryChecksBetExists()
+        public async void GivenWordText_RepositoryChecksWordExists()
         {
             // Arrange
             var sentece = Lorem.Sentence();

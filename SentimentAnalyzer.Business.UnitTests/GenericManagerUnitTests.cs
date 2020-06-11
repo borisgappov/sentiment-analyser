@@ -20,7 +20,7 @@ namespace SentimentAnalyzer.Business.UnitTests
         private Word word;
 
         [Fact]
-        public async void GivenModelAndUserId_ManagerWillCreateEntityRecord()
+        public async void GivenModel_ManagerWillCreateEntityRecord()
         {
             // Arrange
             var manager = new GenericManager<Word>(UoWFactoryMock.Object);
@@ -32,7 +32,7 @@ namespace SentimentAnalyzer.Business.UnitTests
         }
 
         [Fact]
-        public async void GivenModelAndUserId_ManagerWillDeleteEntityRecord()
+        public async void GivenModel_ManagerWillDeleteEntityRecord()
         {
             // Arrange
             var manager = new GenericManager<Word>(UoWFactoryMock.Object);
@@ -44,7 +44,7 @@ namespace SentimentAnalyzer.Business.UnitTests
         }
 
         [Fact]
-        public async void GivenModelAndUserId_ManagerWillUpdateEntityRecord()
+        public async void GivenModel_ManagerWillUpdateEntityRecord()
         {
             // Arrange
             var manager = new GenericManager<Word>(UoWFactoryMock.Object);
